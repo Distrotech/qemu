@@ -1183,8 +1183,6 @@ case "$cpu" in
            cc_i386='$(CC) -m32'
            ;;
     x86_64)
-           CPU_CFLAGS="-m64"
-           LDFLAGS="-m64 $LDFLAGS"
            cc_i386='$(CC) -m32'
            ;;
     x32)
@@ -4926,6 +4924,7 @@ case "$target_name" in
   ;;
   x86_64)
     TARGET_BASE_ARCH=i386
+    target_long_alignment=8
   ;;
   alpha)
   ;;
@@ -4965,6 +4964,8 @@ case "$target_name" in
     TARGET_ARCH=mips64
     TARGET_BASE_ARCH=mips
     echo "TARGET_ABI_MIPSN64=y" >> $config_target_mak
+    target_long_alignment=8
+    target_nptl="yes"
   ;;
   moxie)
   ;;
@@ -4990,6 +4991,8 @@ case "$target_name" in
     TARGET_BASE_ARCH=ppc
     TARGET_ABI_DIR=ppc
     gdb_xml_files="power64-core.xml power-fpu.xml power-altivec.xml power-spe.xml"
+    target_long_alignment=8
+    target_nptl="yes"
   ;;
   ppc64abi32)
     TARGET_ARCH=ppc64
